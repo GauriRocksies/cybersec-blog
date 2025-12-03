@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'cyberproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cyberdb',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'moon25',
+        'PASSWORD': 'post@2807',
         'HOST': 'localhost',
         'PORT': '5432',
     }

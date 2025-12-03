@@ -10,11 +10,13 @@
 <div class="container mt-4">
     <h3>Create New Post</h3>
 
-    <form class="mt-3">
-        <input type="text" class="form-control mb-3" placeholder="Post Title">
-        <textarea class="form-control mb-3" rows="5" placeholder="Write something..."></textarea>
-        <button class="btn btn-success">Submit</button>
-    </form>
+   <form class="mt-3" method="POST" action="{% url 'create_post' %}">
+    {% csrf_token %}
+    <input type="text" name="title" class="form-control mb-3" placeholder="Post Title" required>
+    <textarea name="content" class="form-control mb-3" rows="5" placeholder="Write something..." required></textarea>
+    <button class="btn btn.success">Submit</button>
+</form>
+
 </div>
 
 </body>
