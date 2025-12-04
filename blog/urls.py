@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
+from . import views_auth
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('signup/', views_auth.signup, name='signup'),
+    path('home/', views.home, name='home'),
     path('post/new/', views.create_post, name='create_post'),
     path('post/<int:post_id>/', views.post_detail, name='post_detail'),
     path('post/<int:post_id>/comment/', views.add_comment, name='add_comment'),

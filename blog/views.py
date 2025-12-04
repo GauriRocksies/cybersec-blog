@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .models import Post, Comment, Like
 
-
+@login_required
 def home(request):
     """
     Show all posts + like/comment counts.
@@ -37,7 +37,7 @@ def create_post(request):
 
     return render(request, "blog/create_post.html")
 
-
+@login_required
 def post_detail(request, post_id):
     """
     Show a single post, like count, comments, and whether user liked it.
