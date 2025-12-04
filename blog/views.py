@@ -108,3 +108,8 @@ def signup(request):
 
     return render(request, "registration/signup.html", {"form": form})
 
+@login_required
+def profile(request):
+    user = request.user
+    posts = user.post_set.all()  # All posts created by this user
+    return render(request, 'profile.html', {'user': user, 'posts': posts})

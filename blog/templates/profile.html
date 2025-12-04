@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+</head>
+<body>
+
+<h1>{{ user.username }}'s Profile</h1>
+<p>Email: {{ user.email }}</p>
+
+<h2>Your Posts</h2>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="/home/post/{{ post.id }}">{{ post.title }}</a>
+        </li>
+    {% empty %}
+        <li>No posts yet.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
