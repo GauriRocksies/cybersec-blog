@@ -17,6 +17,8 @@ urlpatterns = [
     # 🔹 Redirect root → login page
     path('', RedirectView.as_view(url='/accounts/login/', permanent=False)),
 
+    path('', include('blog.urls')),
+
     # 🔹 Blog app under /home/
     path('home/', include('blog.urls')),
 
@@ -24,5 +26,5 @@ urlpatterns = [
     path('accounts/signup/', blog_views.signup, name='signup'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#if settings.DEBUG:
+ #   urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
