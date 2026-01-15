@@ -22,9 +22,106 @@
 
 <body class="font-display bg-background-light dark:bg-background-dark">
 
-<div class="relative flex min-h-screen w-full flex-col">
-    
+<div class="relative flex min-h-screen w-full flex-col px-4 py-6">
+
+  <!-- Post Card -->
+  <div class="mx-auto w-full max-w-xl bg-white rounded-xl shadow-sm p-6">
+
+    <!-- Title -->
+    <h1 class="text-2xl font-extrabold text-slate-900">
+      {{ post.title }}
+    </h1>
+
+    <!-- Meta -->
+    <p class="mt-1 text-sm text-slate-500">
+      By {{ post.author.username }} · {{ post.created_at }}
+    </p>
+
+    <!-- Content -->
+    <p class="mt-4 text-slate-700 leading-relaxed whitespace-pre-line">
+      {{ post.content }}
+    </p>
+
+    <!-- Image -->
+    {% if post.image %}
+      <div class="mt-4 overflow-hidden rounded-xl border">
+        <img src="{{ post.image.url }}" class="w-full object-cover" />
+      </div>
+    {% endif %}
+
+  <!-- Interaction Section -->
+<div class="mx-auto w-full max-w-xl mt-6">
+
+  <!-- Like Section -->
+  <div class="flex items-center justify-center gap-3 mb-6">
+
+    <form method="POST" action="{% url 'like_post' post.id %}">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="flex items-center gap-1 px-4 py-1 rounded-full text-sm border
+               {% if user_liked %}bg-blue-600 text-white{% else %}text-slate-600{% endif %}">
+        👍 Like
+      </button>
+    </form>
+
+    <span class="text-sm text-slate-500">
+      {{ like_count }} likes
+    </span>
+
+  </div>
+
+  <!-- Comments -->
+  <div>
+
+    <h3 class="text-lg font-semibold text-slate-900 mb-3 text-center">
+      Comments
+    </h3>
+
+    {% for comment in comments %}
+      <div class="mb-3 rounded-lg bg-slate-50 p-4">
+        <p class="text-sm font-semibold text-slate-800">
+          {{ comment.user.username }}
+        </p>
+        <p class="text-sm text-slate-700">
+          {{ comment.content }}
+        </p>
+        <p class="text-xs text-slate-500 mt-1">
+          {{ comment.created_at }}
+        </p>
+      </div>
+    {% empty %}
+      <p class="text-slate-500 text-sm text-center">
+        No comments yet. Be the first to say something.
+      </p>
+    {% endfor %}
+
+  </div>
+
+  <!-- Add Comment -->
+  <form method="POST" action="{% url 'add_comment' post.id %}" class="mt-4">
+    {% csrf_token %}
+    <textarea
+      name="content"
+      required
+      rows="3"
+      placeholder="Write a comment..."
+      class="w-full rounded-lg border border-slate-300 p-3 text-sm focus:outline-none focus:ring"
+    ></textarea>
+
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        class="mt-2 px-5 py-2 bg-blue-600 text-white rounded-lg text-sm">
+        Post Comment
+      </button>
+    </div>
+  </form>
+
 </div>
+
+
+
 
 </body>
 </html>

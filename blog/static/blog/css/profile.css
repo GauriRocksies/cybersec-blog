@@ -1,0 +1,13 @@
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+.shadow {
+  transition: box-shadow 0.2s ease;
+}
+
+.shadow:hover {
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}

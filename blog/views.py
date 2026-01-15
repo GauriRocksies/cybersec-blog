@@ -94,7 +94,8 @@ def like_post(request, post_id):
     else:
         Like.objects.create(post=post, user=request.user)
 
-    return redirect("home")
+    return redirect(request.META.get("HTTP_REFERER", "home"))
+
 
 
 # ===================== SIGNUP =====================

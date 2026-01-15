@@ -1,37 +1,80 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>User Profile Page</title>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: "#f4f6f8",
+            card: "#ffffff",
+            primary: "#2563eb",
+            muted: "#6b7280"
+          }
+        }
+      }
+    }
+  </script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'blog/css/profile.css' %}">
-
-    <!-- Tailwind Config -->
-    <script src="{% static 'blog/js/profile_tailwind.js' %}"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'blog/css/profile.css' %}">
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display">
+<body class="bg-background min-h-screen font-sans">
 
-<!-- 🔽 EVERYTHING BELOW IS 100% UNCHANGED -->
-<!-- Your entire body content stays exactly the same -->
-<!-- (No edits, no removals, no formatting changes) -->
+  <div class="max-w-4xl mx-auto py-12 px-4">
 
-{{ block.super }}
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold text-gray-900">
+        {{ request.user.username }}
+      </h1>
+      <p class="text-muted">Welcome to your profile</p>
+    </div>
 
-<!-- Page JS -->
-<script src="{% static 'blog/js/profile.js' %}"></script>
+    <!-- Posts -->
+    <div>
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Your Posts</h2>
 
+      {% if posts %}
+        <div class="space-y-4">
+          {% for post in posts %}
+            <div class="bg-card p-5 rounded-xl shadow border">
+              <h3 class="text-lg font-semibold text-gray-900">
+                {{ post.title }}
+              </h3>
+              <p class="text-sm text-muted">
+                {{ post.created_at }}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted text-center mt-10">
+          You haven’t posted anything yet.
+        </p>
+      {% endif %}
+    </div>
+    
+   <a href="{% url 'create_post' %}"
+   class="inline-block mb-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+  + Create New Post
+</a>
+
+
+  </div>
+
+   
+
+  <script src="{% static 'blog/js/profile.js' %}"></script>
 </body>
 </html>
