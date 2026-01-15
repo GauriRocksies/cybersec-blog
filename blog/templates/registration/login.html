@@ -92,21 +92,22 @@
                 <!-- PASSWORD -->
                 <div>
                   <p class="login-label text-sm pb-2">Password</p>
-                  <div class="flex">
+                  <div class="relative">
                     <input
                       type="password"
                       name="password"
+                      id="password-input"
                       required
                       placeholder="Enter your password"
-                      class="login-input w-full h-12 rounded-l-lg px-4"
+                      class="login-input w-full h-12 rounded-lg px-4 pr-12"
                     />
-                    <div
-                      class="flex items-center justify-center px-4 rounded-r-lg border border-l-0 border-gray-300 bg-white"
+
+                    <span
+                      id="password-toggle"
+                      class="material-symbols-outlined password-toggle absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
                     >
-                      <span class="material-symbols-outlined">
-                        visibility
-                      </span>
-                    </div>
+                      visibility
+                    </span>
                   </div>
                 </div>
 
@@ -138,5 +139,6 @@
         </main>
       </div>
     </div>
+    <script src="{% static 'js/login.js' %}"></script>
   </body>
 </html>
